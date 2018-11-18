@@ -20,7 +20,6 @@ public class FolioTracker {
 	
 	FolioTracker(){
 		init();
-		System.out.print(stockValue);			
 		scheduler.scheduleWithFixedDelay(new Runnable() {
 		    public void run() {
 		        System.out.println("stocks: " + stocks + "\n" +  update());
