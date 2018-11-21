@@ -2,13 +2,13 @@ import java.util.Set;
 
 public interface IFolio {
 
-	public Double totalHolding();
+	public double totalHolding();
 	
 	public Set<Stock> getStocks();
 	
 	public Stock getStock(String tickerSymbol);
 	
-	public Boolean addStock(String name, String ticker, double pricePerShare, int numShares);
+	public boolean addStock(String name, String ticker, double pricePerShare, int numShares);
 	
-	public Boolean updateStock();
+	public boolean updateStock();
 }
