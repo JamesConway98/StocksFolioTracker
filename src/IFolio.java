@@ -1,4 +1,5 @@
 import java.util.Set;
+import java.util.List;
 
 public interface IFolio {
 
@@ -10,5 +11,5 @@ public interface IFolio {
 	
 	public boolean addStock(String name, String ticker, double pricePerShare, int numShares);
 	
-	public boolean updateStock();
+	public boolean updateStock(List<String> t);
 }
