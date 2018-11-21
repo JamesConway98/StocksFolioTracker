@@ -1,11 +1,10 @@
-
 public interface IFolioTracker {
 
-	public Boolean createFolio(String name);
+	public boolean createFolio(String name);
 	
 	public Folio openFolio(String name);
 	
-	public Boolean saveFolio(String name);
+	public boolean saveFolio(String name);
 	
-	public Boolean deleteFolio(String name);
+	public boolean deleteFolio(String name);
 }
