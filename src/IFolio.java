@@ -6,7 +6,7 @@ public interface IFolio {
 	
 	public Set<Stock> getStocks();
 	
-	public Stock getStock();
+	public Stock getStock(String tickerSymbol);
 	
 	public Boolean addStock(String name, String ticker, double pricePerShare, int numShares);
 	
