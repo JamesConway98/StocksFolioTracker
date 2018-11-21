@@ -9,13 +9,6 @@ public class Folio implements IFolio {
 	private String name;
 	private double totalHolding;
 	
-	public static void main(String[] args) {
-		stocks = new HashSet<Stock>();
-		stocks.add(new Stock("AAPL", "stock_name", 220, 5));
-		tickers = getListTicker();
-		new Folio("hello").updateStock(tickers);
-	}
-	
 	Folio(String name){
 		this.name = name;
 		stocks = new HashSet<Stock>();
