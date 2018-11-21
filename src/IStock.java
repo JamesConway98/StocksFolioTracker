@@ -1,19 +1,18 @@
-
 public interface IStock {
 
 	public String getTickerSymbol();
 	
 	public double getPricePerShare();
 	
-	public Boolean setPricePerShare(double pps);
+	public boolean setPricePerShare(double pps);
 	
 	public int getNumOfShares();
 	
-	public Boolean setNumOfShares();
+	public boolean setNumOfShares();
 	
-	public Double getValue();
+	public double getValue();
 	
-	public Boolean getChange();
+	public boolean getChange();
 	
 	
 	
