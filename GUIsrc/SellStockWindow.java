@@ -26,7 +26,7 @@ public class SellStockWindow extends Stage
 	
 	// Button
 	buttonSellNow = new Button("Sell");
-	buttonSellNow.setOnMouseClicked(controller::buttonBuyNowClick);
+	buttonSellNow.setOnMouseClicked(controller::buttonSellNowClick);
 	grid.add(buttonSellNow, 2, 3);
 	GridPane.setHgrow(buttonSellNow, Priority.ALWAYS);
 	GridPane.setVgrow(buttonSellNow, Priority.ALWAYS);

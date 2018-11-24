@@ -35,7 +35,14 @@ public class Folio implements IFolio {
 		}return null;
 	}
 
-	
+	public boolean buyStock(String tickerSymbol, int amount) {
+		return false; //TODO
+	}
+
+	public boolean sellStock(String tickerSymbol, int amount) {
+		return false; //TODO
+	}
+
 	public boolean addStock(String symbol, String name, double value, int amount) {
 		Stock x = new Stock(symbol, name, value, amount);
 		return stocks.add(x);
@@ -52,6 +59,10 @@ public class Folio implements IFolio {
 			tickerSymbols.add(s.getSymbol());
 			System.out.println("stock here: "  + s.getSymbol());
 		}return tickerSymbols;
+	}
+
+	public String getName(){
+		return name;
 	}
 
 }

@@ -1,15 +1,18 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class FolioTracker {
+public class FolioTracker implements IFolioTracker{
 	private static Double sampleTicker;
 	private static List<String> stocks;
 	private static List<Double> stockValue;
 	private static List<Double> maxStockValue;
 	private static List<Double> minStockValue;
+	private Set<Folio> folios;
 	
 	private final ScheduledExecutorService scheduler =
 		     Executors.newScheduledThreadPool(1);
@@ -19,6 +22,8 @@ public class FolioTracker {
 	}	
 	
 	FolioTracker(){
+
+		folios = new HashSet<>();//TODO add currently open folios to this set
 		init();
 		scheduler.scheduleWithFixedDelay(new Runnable() {
 		    public void run() {
@@ -82,6 +87,32 @@ public class FolioTracker {
 			System.err.println(e);			
 		}
 		return stockValue;
+	}
+
+	public boolean createFolio(String name) {
+		return false;
+	}
+
+	public Folio openFolio(String name) {
+		return null;
+	}
+
+	public boolean saveFolio(String name) {
+		return false;
+	}
+
+	public boolean deleteFolio(String name) {
+		return false;
+	}
+
+	public Folio getFolio(String name){
+
+		for(Folio folio: folios) {
+			if (folio.getName() == name)
+				return folio;
+		}
+
+		return null;
 	}
 
 
