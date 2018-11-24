@@ -1,13 +1,10 @@
 import javafx.geometry.HPos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-//import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
-//import javafx.scene.text.Text;
 import javafx.stage.*;
 
 public class CreateFolioWindow extends Stage
@@ -49,5 +46,15 @@ public class CreateFolioWindow extends Stage
 	scene = new Scene(grid, 400, 200);
 	this.setTitle("Create Folio");
 	this.setScene(scene);
+    }
+    
+    public void showWindow() // follow the convention
+    {
+	this.show();
+    }
+    
+    public String getNameText()
+    {
+	return textName.getText();
     }
 }

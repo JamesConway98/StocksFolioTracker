@@ -2,7 +2,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Stock
+public class Stock // TODO interface
 {
     private SimpleStringProperty symbol, name;
     private SimpleIntegerProperty amount;

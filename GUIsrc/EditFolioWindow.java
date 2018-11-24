@@ -1,20 +1,17 @@
 import javafx.geometry.HPos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-//import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
-//import javafx.scene.text.Text;
 import javafx.stage.*;
 
 public class EditFolioWindow extends Stage
 {
     private GridPane grid;
     private Scene scene;
-    private Controller controller;
+    private Controller controller; // TODO interface
     
     private Button buttonCreate;
     private TextField textName;
@@ -27,7 +24,7 @@ public class EditFolioWindow extends Stage
 	grid.setVgap(10);
 	grid.setHgap(10);
 	
-	buttonCreate = new Button("Submit");
+	buttonCreate = new Button("Apply");
 	// TODO listener
 	grid.add(buttonCreate, 2, 0);
 	GridPane.setHgrow(buttonCreate, Priority.ALWAYS);
@@ -49,5 +46,16 @@ public class EditFolioWindow extends Stage
 	scene = new Scene(grid, 400, 200);
 	this.setTitle("Edit Folio");
 	this.setScene(scene);
+    }
+    
+    public void showWindow() // TODO add arguments to set TextFields
+    {
+	// TODO set TextFields
+	this.show();
+    }
+    
+    public String getNameText()
+    {
+	return textName.getText();
     }
 }
