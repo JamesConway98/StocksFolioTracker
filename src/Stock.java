@@ -8,10 +8,10 @@ public class Stock implements IStock {
     private SimpleDoubleProperty pps, holding;
     private boolean change;
 
-    public Stock(String symbol, String name, double value, int amount, boolean change) {
+    public Stock(String symbol, String name, double pricePerShare, int amount, boolean change) {
         this.symbol = new SimpleStringProperty(symbol);
         this.name = new SimpleStringProperty(name);
-        this.pps = new SimpleDoubleProperty(value);
+        this.pps = new SimpleDoubleProperty(pricePerShare);
         this.numShares = new SimpleIntegerProperty(amount);
         this.holding = new SimpleDoubleProperty(this.pps.get() * this.numShares.get());
         this.change = change;
@@ -43,7 +43,7 @@ public class Stock implements IStock {
      */
     @Override
     public boolean setPricePerShare(double pps) {
-        if (this.pps.get() < pps)
+        if (pps < this.pps.get())
             setChange(false);
         else
             setChange(true);
