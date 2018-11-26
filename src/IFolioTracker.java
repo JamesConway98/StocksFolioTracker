@@ -23,9 +23,9 @@ public interface IFolioTracker {
     /**
      * Requires: name != null
      * Modifies: this
-     * Effects: Removes a Folio with the specified name from this if a Folio with the specified name exists in this, return true if this changed as result, else returns false.
+     * Effects: Removes a Folio with the specified name from this if a Folio with the specified name exists in this, and removes the corresponding file in the filesystem if it exists and returns true if this changed as result, else returns false.
      */
-    boolean closeFolio(String name);
+    boolean deleteFolio(String name);
 
     /**
      * Requires: name != null

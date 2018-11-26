@@ -103,20 +103,18 @@ public class FolioTracker implements IFolioTracker {
     /**
      * Requires: name != null
      * Modifies: this
-     * Effects: Removes a Folio with the specified name from this if a Folio with the specified name exists in this, return true if this changed as result, else returns false.
+     * Effects: Removes a Folio with the specified name from this if a Folio with the specified name exists in this, and removes the corresponding file in the filesystem if it exists and returns true if this changed as result, else returns false.
      */
-    public boolean closeFolio(String name) {
+    public boolean deleteFolio(String name) {
         // Removes the Folio with the specified name from this if it exists in this.
         // Returns false if the Folio with the specified name does not exist in this.
-        return (folios.remove(getFolio(name)));
-
-        /* LEGACY CODE :(
-
+        if (!folios.remove(getFolio(name)))
+            return false;
         // Returns true if the file for the corresponding Folio exists and is deleted, else returns false due to an IO error.
         if (new File(name + "_DATA.txt").exists())
             return new File(name + "_DATA.txt").delete();
         // Returns true if the Folio with the specified name wa removed from this previously and it does not have a corresponding file in the filesystem to delete.
-        return true;*/
+        return true;
     }
 
     /**
@@ -133,5 +131,14 @@ public class FolioTracker implements IFolioTracker {
         return null;
     }
 
-
+    /**
+     * Requires: name != null
+     * Modifies: this
+     * Effects: Removes a Folio with the specified name from this if a Folio with the specified name exists in this, and returns true if this changed as result, else returns false.
+     */
+    public boolean closeFolio(String name){
+        // Removes the Folio with the specified name from this if it exists in this.
+        // Returns false if the Folio with the specified name does not exist in this.
+        return folios.remove(getFolio(name));
+    }
 }
