@@ -11,13 +11,13 @@ public class SellStockWindow extends Stage
 {
     private GridPane grid;
     private Scene scene;
-    private Controller controller; // TODO interface
+    private IController controller;
     
     private Button buttonSellNow;
     private TextField textSymbol, textName, textValue, textAmount;
     private Text infoSymbol, infoName, infoValue, infoAmount;
     
-    public SellStockWindow(Controller controller)
+    public SellStockWindow(IController controller)
     {
 	this.controller = controller;
 	grid = new GridPane();
@@ -89,9 +89,46 @@ public class SellStockWindow extends Stage
 	this.setScene(scene);
     }
     
-    public void showWindow() // TODO add arguments to set TextFields
+    public void showWindow(String symbol, String name, double value, int amount)
     {
-	// TODO set TextFields
+	textSymbol.setText(symbol);
+	textName.setText(name);
+	textValue.setText(String.valueOf(value));
+	textAmount.setText(String.valueOf(amount));
 	this.show();
+    }
+    
+    public String getName()
+    {
+	return textName.getText();
+    }
+
+    public String getSymbol()
+    {
+	return textSymbol.getText();
+    }
+
+    public int getAmount()
+    {
+	try
+	{
+	    return Integer.parseInt(textAmount.getText());
+	}
+	catch (Exception e)
+	{
+	    return 0;
+	}
+    }
+    
+    public double getValue()
+    {
+	try
+	{
+	    return Double.parseDouble(textValue.getText());
+	}
+	catch(Exception e)
+	{
+	    return 0;
+	}
     }
 }

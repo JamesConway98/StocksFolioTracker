@@ -1,6 +1,7 @@
 import javafx.scene.input.MouseEvent;
 
-public interface IController {
+public interface IController
+{
 
     void buttonBuyStockClick(MouseEvent e);
 
@@ -19,5 +20,11 @@ public interface IController {
     void buttonSellNowClick(MouseEvent e);
 
     void buttonBuyNowClick(MouseEvent e);
+
+    public void buttonCreateFolioNowClick(MouseEvent e);
+    
+    public void buttonEditFolioNowClick(MouseEvent e);
+    
+    public void buttonFileClick(MouseEvent e);
 
 }

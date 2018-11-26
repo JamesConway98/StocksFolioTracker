@@ -13,9 +13,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 
-public class GUI extends Application
+public class GUI extends Application implements IGUI
 {
-    private Controller controller; // TODO make this an interface
+    private IController controller;
     private GridPane grid;
     private Scene scene;
     
@@ -34,6 +34,7 @@ public class GUI extends Application
     private SellStockWindow sellStockWindow;
     private CreateFolioWindow createFolioWindow;
     private EditFolioWindow editFolioWindow;
+    private FileWindow fileWindow;
 
     public void start(Stage primaryStage) throws Exception
     {
@@ -43,6 +44,7 @@ public class GUI extends Application
 	sellStockWindow = new SellStockWindow(controller);
 	createFolioWindow = new CreateFolioWindow(controller);
 	editFolioWindow = new EditFolioWindow(controller);
+	fileWindow = new FileWindow(controller);
 	
 	grid = new GridPane();
 	grid.setVgap(10);
@@ -63,6 +65,7 @@ public class GUI extends Application
 	grid.add(tabPane, 1, 0);
 	GridPane.setRowSpan(tabPane, 8);
 	
+	/*
 	// TEST TABS
 	Tab tab1 = new Tab("Portfolio 1");
 	tab1.setClosable(false);
@@ -97,6 +100,7 @@ public class GUI extends Application
 	table.getColumns().setAll(symbolCol, nameCol, amountCol, valueCol, totalCol);
 	
 	tab1.setContent(table);
+	*/
 	
 	// Folio side (left)
 	
@@ -162,25 +166,34 @@ public class GUI extends Application
 	return l;
     }
 
+    // methods to show other windows
+    
     public void showCreateFolioWindow()
     {
-	createFolioWindow.show();
+	createFolioWindow.showWindow();
     }
 
-    public void showBuyStockWindow()
+    public void showBuyStockWindow(String symbol, String name, int amount)
     {
-	buyStockWindow.show();
+	buyStockWindow.showWindow(symbol, name, amount);
     }
 
-    public void showSellStockWindow()
+    public void showSellStockWindow(String symbol, String name, double value, int amount)
     {
-	sellStockWindow.show();
+	sellStockWindow.showWindow(symbol, name, value, amount);
     }
 
-    public void showEditFolioWindow()
+    public void showEditFolioWindow(String name)
     {
-	editFolioWindow.show();
+	editFolioWindow.showWindow(name);
     }
+    
+    public void showFileWindow(String path)
+    {
+	fileWindow.showWindow(path);
+    }
+    
+    // methods to modify/access data in main window
     
     public void addTab(List<Stock> content, String name)
     {
@@ -201,5 +214,101 @@ public class GUI extends Application
 	table.getColumns().setAll(symbolCol, nameCol, amountCol, valueCol, totalCol);
 	tab.setContent(table);
 	tabPane.getTabs().add(tab);
+    }
+    
+    public String getOpenFolioName()
+    {
+	int i = 0;
+	for(Tab tab : tabPane.getTabs())
+	{
+	    if(tabPane.getSelectionModel().isSelected(i))
+	    {
+		return tab.getText(); // return the folio name
+	    }
+	    i++;
+	}
+	return null;
+    }
+    
+    public int getStockIndex()
+    {
+	int i = 0;
+	for(Tab tab : tabPane.getTabs())
+	{
+	    if(tabPane.getSelectionModel().isSelected(i))
+	    {
+		int j = 0;
+		for(Object o : ((TableView) tab.getContent()).getItems())
+		{
+		    if(((TableView) tab.getContent()).getSelectionModel().isSelected(j))
+		    {
+			return j;
+		    }
+		    j++;
+		}
+	    }
+	    i++;
+	}
+	return -1; // no stock selected
+    }
+    
+    // methods to get data from fileWindow
+    
+    public String getFilePath()
+    {
+	return fileWindow.getFilePath();
+    }
+    
+    // methods to get data from buyStockWindow
+    
+    public String getBuyName()
+    {
+	return buyStockWindow.getName();
+    }
+    
+    public String getBuySymbol()
+    {
+	return buyStockWindow.getSymbol();
+    }
+    
+    public int getBuyAmount()
+    {
+	return buyStockWindow.getAmount();
+    }
+    
+    // methods to get data from sellStockWindow
+    
+    public String getSellName()
+    {
+	return sellStockWindow.getName();
+    }
+    
+    public String getSellSymbol()
+    {
+	return sellStockWindow.getSymbol();
+    }
+    
+    public int getSellAmount()
+    {
+	return sellStockWindow.getAmount();
+    }
+    
+    public double getSellValue()
+    {
+	return sellStockWindow.getValue();
+    }
+    
+    // methods to get data from editFolioWindow
+    
+    public String getEditName()
+    {
+	return editFolioWindow.getNameText();
+    }
+    
+    // methods to get data from createFolioWindow
+    
+    public String getCreateName()
+    {
+	return createFolioWindow.getNameText();
     }
 }

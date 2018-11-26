@@ -7,55 +7,55 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import javafx.stage.*;
 
-public class EditFolioWindow extends Stage
+public class FileWindow extends Stage
 {
     private GridPane grid;
     private Scene scene;
     private IController controller;
     
     private Button buttonCreate;
-    private TextField textName;
+    private TextField textPath;
     private Text info;
     
-    public EditFolioWindow(IController controller)
+    public FileWindow(IController controller)
     {
 	this.controller = controller;
 	grid = new GridPane();
 	grid.setVgap(10);
 	grid.setHgap(10);
 	
-	buttonCreate = new Button("Apply");
-	buttonCreate.setOnMouseClicked(controller::buttonEditFolioNowClick);
+	buttonCreate = new Button("Submit");
+	buttonCreate.setOnMouseClicked(controller::buttonFileClick);
 	grid.add(buttonCreate, 2, 0);
 	GridPane.setHgrow(buttonCreate, Priority.ALWAYS);
 	GridPane.setVgrow(buttonCreate, Priority.ALWAYS);
 	GridPane.setHalignment(buttonCreate, HPos.CENTER);
 	
-	textName = new TextField("Portfolio 1");
-	grid.add(textName, 1, 0);
-	GridPane.setHgrow(textName, Priority.ALWAYS);
-	GridPane.setVgrow(textName, Priority.ALWAYS);
-	GridPane.setHalignment(textName, HPos.CENTER);
+	textPath = new TextField();
+	grid.add(textPath, 1, 0);
+	GridPane.setHgrow(textPath, Priority.ALWAYS);
+	GridPane.setVgrow(textPath, Priority.ALWAYS);
+	GridPane.setHalignment(textPath, HPos.CENTER);
 	
-	info = new Text("Portfolio Name:");
+	info = new Text("File Path:");
 	grid.add(info, 0, 0);
 	GridPane.setHgrow(info, Priority.ALWAYS);
 	GridPane.setVgrow(info, Priority.ALWAYS);
 	GridPane.setHalignment(info, HPos.CENTER);
 	
 	scene = new Scene(grid, 400, 200);
-	this.setTitle("Edit Folio");
+	this.setTitle("Open/Save");
 	this.setScene(scene);
     }
     
-    public void showWindow(String currentName)
+    public void showWindow(String path)
     {
-	textName.setText(currentName);
+	textPath.setText(path);
 	this.show();
     }
     
-    public String getNameText()
+    public String getFilePath()
     {
-	return textName.getText();
+	return textPath.getText();
     }
 }
