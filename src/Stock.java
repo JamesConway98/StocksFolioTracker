@@ -96,4 +96,21 @@ public class Stock implements IStock {
     public boolean setChange(boolean change) {
         return this.change = change;
     }
+
+    @Override
+    public boolean equals(Object aStock){
+        if( !(aStock instanceof Stock )) {
+
+            return false;
+        }
+        Stock s = (Stock) aStock;
+
+        return s.getTickerSymbol().equals(symbol.get())
+                && s.getName().equals(name.get())
+                && s.getNumOfShares() == numShares.get()
+                && s.getPricePerShare() == pps.get()
+                && s.getChange() == change;
+
+
+    }
 }
