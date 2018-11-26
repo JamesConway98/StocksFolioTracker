@@ -193,6 +193,33 @@ public class GUI extends Application implements IGUI
 	fileWindow.showWindow(path);
     }
     
+    
+// methods to close other windows
+    public void closeCreateFolioWindow()
+    {
+	createFolioWindow.close();
+    }
+
+    public void closeBuyStockWindow()
+    {
+	buyStockWindow.close();
+    }
+
+    public void closeSellStockWindow()
+    {
+	sellStockWindow.close();
+    }
+
+    public void closeEditFolioWindow()
+    {
+	editFolioWindow.close();
+    }
+    
+    public void closeFileWindow()
+    {
+	fileWindow.close();
+    }
+    
     // methods to modify/access data in main window
     
     public void addTab(List<Stock> content, String name)
@@ -214,6 +241,10 @@ public class GUI extends Application implements IGUI
 	table.getColumns().setAll(symbolCol, nameCol, amountCol, valueCol, totalCol);
 	tab.setContent(table);
 	tabPane.getTabs().add(tab);
+    }
+    
+    public void update() {
+    	//TODO
     }
     
     public String getOpenFolioName()

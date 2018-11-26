@@ -1,3 +1,5 @@
+import java.util.Set;
+
 public interface IFolioTracker {
 
     /**
@@ -32,4 +34,6 @@ public interface IFolioTracker {
      * Effects: Returns a folio with the specified name if it exists in this, else returns null.
      */
     Folio getFolio(String name);
+    
+    Set<Folio> getFolios();
 }

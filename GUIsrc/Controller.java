@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 import javafx.scene.input.MouseEvent;
 
 public class Controller implements IController
@@ -78,8 +80,11 @@ public class Controller implements IController
     {
         Folio folio = folioTracker.getFolio(gui.getOpenFolioName());
 
-      //  if(folio != null)
-          //  folio.sellStock(" ", 0);
+      //if(folio != null)
+			//folio.sellStock(" ", 0);
+		
+        gui.closeSellStockWindow();
+        gui.update();
 
     }
     
@@ -91,7 +96,10 @@ public class Controller implements IController
         Folio folio = folioTracker.getFolio(gui.getOpenFolioName());
 
         if(folio != null)
-            folio.buyStock(" ", 0);
+            folio.buyStock("Ticker Symbol", 0);
+        
+        gui.closeBuyStockWindow();
+        gui.update();
 
     }
     
@@ -100,7 +108,18 @@ public class Controller implements IController
      */
     public void buttonCreateFolioNowClick(MouseEvent e)
     {
-	
+    	folioTracker.createFolio(gui.getCreateName());
+    	gui.closeCreateFolioWindow();
+    	gui.update();
+    	
+    	folioTracker.saveFolio(gui.getCreateName());
+    	
+    	System.out.println(Arrays.toString(folioTracker.getFolios().toArray()));
+    	
+    	if(folioTracker.getFolio(gui.getCreateName()) == null){
+    		System.out.println("BOOOKM");
+    	}
+    		
     }
     
 
@@ -109,7 +128,13 @@ public class Controller implements IController
      */
     public void buttonEditFolioNowClick(MouseEvent e)
     {
-	
+    	Folio folio = folioTracker.getFolio(gui.getOpenFolioName());
+
+        if(folio != null)
+            folio.setFolioName(gui.getEditName());
+        
+        gui.closeEditFolioWindow();
+        gui.update();
     }
 
     /**
@@ -123,7 +148,9 @@ public class Controller implements IController
 	}
 	else // TODO do stuff for opening a folio
 	{
-	    
+	    folioTracker.openFolio("");
 	}
+	
+	gui.closeFileWindow();
     }
 }

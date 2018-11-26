@@ -7,7 +7,7 @@ public class FolioTracker implements IFolioTracker {
     private Set<Folio> folios; // The currently opened folios
 
     FolioTracker() {
-        folios = new HashSet<>();
+        folios = new HashSet<>(); 
     }
 
     /**
@@ -23,7 +23,7 @@ public class FolioTracker implements IFolioTracker {
         }
         // Add a new Folio with the specified name to this and return true if this changed as a result.
         Folio folio = new Folio(name);
-        return folios.add(folio);
+        return folios.add(folio); 
     }
 
     /**
@@ -129,6 +129,10 @@ public class FolioTracker implements IFolioTracker {
         }
         // Return null no Folio exists in this with the specified name.
         return null;
+    }
+    
+    public Set<Folio> getFolios(){
+    	return folios;
     }
 
     /**

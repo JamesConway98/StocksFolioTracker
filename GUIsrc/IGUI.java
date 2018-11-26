@@ -38,6 +38,32 @@ public interface IGUI
      */
     public void showFileWindow(String path);
     
+    
+    //methods to close other windows
+    
+    public void closeCreateFolioWindow();
+
+    /**
+     * closes the buyStockWindow
+     */
+    public void closeBuyStockWindow();
+
+    /**
+     * closes the sellStockWindow 
+     */
+    public void closeSellStockWindow();
+
+    /**
+     * closes the editFolioWindow 
+     */
+    public void closeEditFolioWindow();
+    
+    /**
+     * closes the fileWindow 
+     */
+    public void closeFileWindow();
+    
+    
     // methods to modify/access data in main window
     
     /**
@@ -46,6 +72,12 @@ public interface IGUI
      * @param name name of tab (i.e. name of the folio)
      */
     public void addTab(List<Stock> content, String name);
+    
+    /**
+     * lets gui know that something has changed
+     * 
+     */
+    public void update();
     
     /**
      * 

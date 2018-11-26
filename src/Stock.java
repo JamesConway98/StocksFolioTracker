@@ -14,7 +14,7 @@ public class Stock implements IStock {
         this.pps = new SimpleDoubleProperty(pricePerShare);
         this.numShares = new SimpleIntegerProperty(amount);
         this.holding = new SimpleDoubleProperty(this.pps.get() * this.numShares.get());
-        this.change = change;
+        this.change = change; 
     }
 
     public String getName(){

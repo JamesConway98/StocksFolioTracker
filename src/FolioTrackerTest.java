@@ -15,7 +15,7 @@ class FolioTrackerTest {
     @BeforeEach
     void setUp() {
         tracker = new FolioTracker();
-    }
+    } 
 
     /**
      * 3 Tests for createFolio(String name):

@@ -53,6 +53,10 @@ public class CreateFolioWindow extends Stage
 	this.show();
     }
     
+    public void closeWindow() {
+    	this.close();
+    }
+    
     public String getNameText()
     {
 	return textName.getText();
