@@ -55,7 +55,7 @@ class FolioTrackerTest {
                 for (Stock s : fOPEN.getStocks()) {
                     System.out.println(s.getName() + "\t\t" + s.getTickerSymbol() + "\t\t" + s.getPricePerShare() + "\t\t" + s.getNumOfShares() + "\t\t" + s.getValue() + "\t\t" + s.getChange() + "\n");
                     assertEquals(s.getName(), "TestStock");
-                    assertEquals(s.getSymbol(), "test");
+                    assertEquals(s.getTickerSymbol(), "test");
                     assertEquals(s.getPricePerShare(), 1.00);
                     assertEquals(s.getNumOfShares(), 66);
                     assertTrue(s.getChange());

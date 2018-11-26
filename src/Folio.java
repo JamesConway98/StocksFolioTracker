@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Set;
 
 public class Folio implements IFolio {
-    private static Set<Stock> stocks;
+    //private static Set<Stock> stocks;
+    private RefreshStocks stocks;
     private String name;
 
     Folio(String name) {
         this.name = name;
-        stocks = new HashSet<>();
+        stocks = new RefreshStocks();
+        stocks.start();
     }
 
     /**
@@ -17,7 +19,7 @@ public class Folio implements IFolio {
      */
     public double totalHolding() {
         double total = 0;
-        for (Stock s : stocks) {
+        for (Stock s : stocks.getStocks()) {
             total += s.getValue();
         }
         return total;
@@ -27,14 +29,14 @@ public class Folio implements IFolio {
      * Effects: Returns this.stocks
      */
     public Set<Stock> getStocks() {
-        return stocks;
+        return stocks.getStocks();
     }
 
     /**
      * Effects: Returns a Stock with the specified tickerSymbol if one exists in this, else returns null
      */
     public Stock getStock(String tickerSymbol) {
-        for (Stock s : stocks) {
+        for (Stock s : stocks.getStocks()) {
             if (s.getTickerSymbol().equals(tickerSymbol)) {
                 return s;
             }
@@ -61,11 +63,15 @@ public class Folio implements IFolio {
      * Modifies: this
      * Effects: Decreases numShares of Stock in this.stocks with the specified tickerSymbol by amount and returns true if this changed as a result, else returns false.
      * If a Stock does not exist in this with the specified tickerSymbol, returns false.
+     * If the amount to decrease numShares in Stock is greater than numShares, throws NotEnoughSharesException
      */
-    public boolean sellStock(String tickerSymbol, int amount) {
+    public boolean sellStock(String tickerSymbol, int amount) throws NotEnoughSharesException {
         Stock s;
         if ((s = getStock(tickerSymbol)) != null) {
-            return s.setNumOfShares(s.getNumOfShares() - amount);
+            if (s.getNumOfShares() < amount)
+                throw new NotEnoughSharesException(amount + " > " + s.getNumOfShares());
+            else
+                return s.setNumOfShares(s.getNumOfShares() - amount);
         }
         return false;
     }
@@ -77,21 +83,7 @@ public class Folio implements IFolio {
      */
     public boolean addStock(String symbol, String name, double value, int amount, boolean change) {
         Stock s = new Stock(symbol, name, value, amount, change);
-        return stocks.add(s);
-    }
-
-    public boolean updateStock(List<String> tickers) {
-        new refreshData(tickers);
-        return true;
-    }
-
-    private static List<String> getListTicker() {
-        List<String> tickerSymbols = new ArrayList<>();
-        for (Stock s : stocks) {
-            tickerSymbols.add(s.getTickerSymbol());
-            System.out.println("stock here: " + s.getTickerSymbol());
-        }
-        return tickerSymbols;
+        return stocks.getStocks().add(s);
     }
 
     /**
@@ -101,4 +93,14 @@ public class Folio implements IFolio {
         return name;
     }
 
+    public RefreshStocks getTimer(){
+        return stocks;
+    }
+
+    class NotEnoughSharesException extends Exception {
+
+        NotEnoughSharesException(String s) {
+            super(s);
+        }
+    }
 }

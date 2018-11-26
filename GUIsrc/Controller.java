@@ -50,8 +50,8 @@ public class Controller implements IController
     {
         Folio folio = folioTracker.getFolio(" ");
 
-        if(folio != null)
-            folio.sellStock(" ", 0);
+      //  if(folio != null)
+          //  folio.sellStock(" ", 0);
 
     }
     
