@@ -63,6 +63,7 @@ class FolioTrackerTest {
                 tracker.deleteFolio("TEST");
             }
             // 2nd Test
+            // IF THIS FAILS YOU NEED TO SET THE PERMISSIONS OF SECURE_FILE_DATA.txt TO NO READ/WRITE/EXEC FOR ANY USER
             assertNull(tracker.openFolio("SECURE_FILE"));
             // 3rd Test
             assertNull(tracker.openFolio("NULL_FILE"));
