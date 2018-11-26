@@ -78,9 +78,9 @@ public class GUI extends Application
 	// TEST TABLE
 	TableView<Stock> table = new TableView<>();
 	ObservableList<Stock> stockList = FXCollections.observableArrayList();
-	stockList.add(new Stock("AAA", "Stock1", 15.5, 3));
-	stockList.add(new Stock("BBB", "Stock2", 36.2, 4));
-	stockList.add(new Stock("CCC", "Stock3", 29.4, 2));
+	stockList.add(new Stock("AAA", "Stock1", 15.5, 3, true));
+	stockList.add(new Stock("BBB", "Stock2", 36.2, 4, true));
+	stockList.add(new Stock("CCC", "Stock3", 29.4, 2, true));
 	table.setItems(stockList);
 	// same as above
 	

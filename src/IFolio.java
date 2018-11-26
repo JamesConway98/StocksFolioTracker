@@ -1,21 +1,21 @@
-import java.util.Set;
 import java.util.List;
+import java.util.Set;
 
 public interface IFolio {
 
-	double totalHolding();
-	
-	Set<Stock> getStocks();
-	
-	Stock getStock(String tickerSymbol);
-	
-	boolean addStock(String name, String ticker, double pricePerShare, int numShares);
-	
-	boolean updateStock(List<String> t);
+    double totalHolding();
 
-	boolean buyStock(String tickerSymbol, int amount);
+    Set<Stock> getStocks();
 
-	boolean sellStock(String tickerSymbol, int amount);
+    Stock getStock(String tickerSymbol);
 
-	String getName();
+    boolean addStock(String name, String ticker, double pricePerShare, int numShares, boolean change);
+
+    boolean updateStock(List<String> t);
+
+    boolean buyStock(String tickerSymbol, int amount);
+
+    boolean sellStock(String tickerSymbol, int amount);
+
+    String getName();
 }

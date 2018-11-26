@@ -2,46 +2,81 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Stock // TODO interface
-{
+public class Stock implements IStock {
     private SimpleStringProperty symbol, name;
-    private SimpleIntegerProperty amount;
-    private SimpleDoubleProperty value, total;
-    
-    public Stock(String symbol, String name, double value, int amount)
-    {
-	this.symbol = new SimpleStringProperty(symbol);
-	this.name = new SimpleStringProperty(name);
-	this.value = new SimpleDoubleProperty(value);
-	this.amount = new SimpleIntegerProperty(amount);
-	this.total = new SimpleDoubleProperty(this.value.get() * this.amount.get());
+    private SimpleIntegerProperty numShares;
+    private SimpleDoubleProperty pps, holding;
+    private boolean change;
+
+    public Stock(String symbol, String name, double value, int amount, boolean change) {
+        this.symbol = new SimpleStringProperty(symbol);
+        this.name = new SimpleStringProperty(name);
+        this.pps = new SimpleDoubleProperty(value);
+        this.numShares = new SimpleIntegerProperty(amount);
+        this.holding = new SimpleDoubleProperty(this.pps.get() * this.numShares.get());
+        this.change = change;
     }
 
-    public String getSymbol()
-    {
-	return symbol.get();
+    public String getSymbol() {
+        return symbol.get();
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name.get();
     }
 
-    public int getAmount()
-    {
-	return amount.get();
+    public int getAmount() {
+        return numShares.get();
     }
 
-    public double getValue()
-    {
-	return value.get();
+    @Override
+    public String getTickerSymbol() {
+        return symbol.get();
     }
 
-    public double getTotal()
-    {
-	this.total.set(this.value.get() * this.amount.get());
-        return total.get();
+    @Override
+    public double getPricePerShare() {
+        return pps.get();
     }
-    
-    
+
+    @Override
+    public boolean setPricePerShare(double pps) {
+        if (this.pps.get() < pps)
+            setChange(false);
+        else
+            setChange(true);
+        this.pps.set(pps);
+        return true;
+    }
+
+    @Override
+    public int getNumOfShares() {
+        return numShares.get();
+    }
+
+    @Override
+    public boolean setNumOfShares(int num) {
+        this.numShares.set(num);
+        return true;
+    }
+
+    public double getValue() {
+        return holding.get();
+    }
+
+    @Override
+    public boolean getChange() {
+        return change;
+    }
+
+    public double getTotal() {
+        this.holding.set(this.pps.get() * this.numShares.get());
+        return holding.get();
+    }
+
+    public void setChange(boolean change) {
+        this.change = change;
+    }
+
+
 }
