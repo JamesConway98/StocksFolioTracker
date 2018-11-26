@@ -96,6 +96,10 @@ public class Folio implements IFolio {
     public RefreshStocks getTimer(){
         return stocks;
     }
+    
+    public void setFolioName(String name){
+    	this.name = name;
+    }
 
     class NotEnoughSharesException extends Exception {
 

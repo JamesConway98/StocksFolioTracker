@@ -17,13 +17,7 @@ public class StockTest {
         stock = new Stock("TSLA", "Tesla", 5, 5, true);
     }
 
-    /**
-     * 3 Tests for createFolio(String name):
-     * <p>
-     * 1st Test: Assert that a call to createFolio(String name) with a name that has not been used for a folio previously, returns true when a new Folio is created with that name.
-     * 2nd Test: Assert that the new Folio object from 1st test has the correct name.
-     * 3rd Test: Assert that a call to createFolio(String name) with a name that has been used for a folio previously, returns false.
-     */
+ 
     @Test
     void stockGetterTest() {
         // 1st Test
@@ -33,7 +27,7 @@ public class StockTest {
         // 4th Test
         assertEquals(stock.getPricePerShare(), 5);
         // 5th Test
-        assertEquals(stock.getNumOfShares(), 5);
+        assertEquals(stock.getNumOfShares(), 5); 
         // 6th Test
         assertEquals(stock.getChange(), true);
         // 7th Test
