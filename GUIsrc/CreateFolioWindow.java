@@ -11,13 +11,13 @@ public class CreateFolioWindow extends Stage
 {
     private GridPane grid;
     private Scene scene;
-    private Controller controller;
+    private IController controller;
     
     private Button buttonCreate;
     private TextField textName;
     private Text info;
     
-    public CreateFolioWindow(Controller controller)
+    public CreateFolioWindow(IController controller)
     {
 	this.controller = controller;
 	grid = new GridPane();
@@ -25,7 +25,7 @@ public class CreateFolioWindow extends Stage
 	grid.setHgap(10);
 	
 	buttonCreate = new Button("Create");
-	// TODO listener
+	buttonCreate.setOnMouseClicked(controller::buttonCreateFolioNowClick);
 	grid.add(buttonCreate, 2, 0);
 	GridPane.setHgrow(buttonCreate, Priority.ALWAYS);
 	GridPane.setVgrow(buttonCreate, Priority.ALWAYS);
