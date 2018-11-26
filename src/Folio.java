@@ -5,25 +5,19 @@ import java.util.Set;
 
 public class Folio implements IFolio {
     private static Set<Stock> stocks;
-    private static List<String> tickers;
     private String name;
-    private double totalHolding;
 
     Folio(String name) {
         this.name = name;
-        stocks = new HashSet<Stock>();
-    }
-
-    private double calcTotalHolding() {
-        double total = 0;
-        for (Stock x : stocks) {
-            total = x.getValue();
-        }
-        return total;
+        stocks = new HashSet<>();
     }
 
     public double totalHolding() {
-        return calcTotalHolding();
+        double total = 0;
+        for (Stock s : stocks) {
+            total += s.getValue();
+        }
+        return total;
     }
 
     public Set<Stock> getStocks() {
@@ -40,16 +34,24 @@ public class Folio implements IFolio {
     }
 
     public boolean buyStock(String tickerSymbol, int amount) {
-        return false; //TODO
+        Stock s;
+        if ((s = getStock(tickerSymbol)) != null) {
+            return s.setNumOfShares(s.getNumOfShares() + amount);
+        }
+        return false;
     }
 
     public boolean sellStock(String tickerSymbol, int amount) {
-        return false; //TODO
+        Stock s;
+        if ((s = getStock(tickerSymbol)) != null) {
+            return s.setNumOfShares(s.getNumOfShares() - amount);
+        }
+        return false;
     }
 
     public boolean addStock(String symbol, String name, double value, int amount, boolean change) {
-        Stock x = new Stock(symbol, name, value, amount, change);
-        return stocks.add(x);
+        Stock s = new Stock(symbol, name, value, amount, change);
+        return stocks.add(s);
     }
 
     public boolean updateStock(List<String> tickers) {
@@ -58,7 +60,7 @@ public class Folio implements IFolio {
     }
 
     private static List<String> getListTicker() {
-        List<String> tickerSymbols = new ArrayList<String>();
+        List<String> tickerSymbols = new ArrayList<>();
         for (Stock s : stocks) {
             tickerSymbols.add(s.getTickerSymbol());
             System.out.println("stock here: " + s.getTickerSymbol());
