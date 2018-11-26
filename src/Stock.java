@@ -17,28 +17,30 @@ public class Stock implements IStock {
         this.change = change;
     }
 
-    public String getSymbol() {
-        return symbol.get();
-    }
-
-    public String getName() {
+    public String getName(){
         return name.get();
     }
-
-    public int getAmount() {
-        return numShares.get();
-    }
-
+    /**
+     * Effects: Returns this.symbol.get()
+     */
     @Override
     public String getTickerSymbol() {
         return symbol.get();
     }
 
+    /**
+     * Effects: Returns this.pps.get()
+     */
     @Override
     public double getPricePerShare() {
         return pps.get();
     }
 
+    /**
+     * Requires: pps > 0
+     * Modifies: this
+     * Effects: Sets the value of this.pps to pps and returns true if this changed as a result.
+     */
     @Override
     public boolean setPricePerShare(double pps) {
         if (this.pps.get() < pps)
@@ -49,34 +51,49 @@ public class Stock implements IStock {
         return true;
     }
 
+    /**
+     * Effects: Returns this.numShares.get()
+     */
     @Override
     public int getNumOfShares() {
         return numShares.get();
     }
 
+    /**
+     * Requires: num >= 0
+     * Modifies: this
+     * Effects: Sets this.numShares to num and returns true if this changed as a result
+     */
     @Override
     public boolean setNumOfShares(int num) {
         this.numShares.set(num);
         return true;
     }
 
+    /**
+     * Modifies: this
+     * Effects: Sets this.holding to the product of this.pps.get() and this.numShares.get() and returns this.holding.get()
+     */
+    @Override
     public double getValue() {
+        this.holding.set(this.pps.get() * this.numShares.get());
         return holding.get();
     }
 
+    /**
+     * Effects: Returns this.change.get()
+     */
     @Override
     public boolean getChange() {
         return change;
     }
 
-    public double getTotal() {
-        this.holding.set(this.pps.get() * this.numShares.get());
-        return holding.get();
+    /**
+     * Modifies: this
+     * Effects: Sets this.change to change and returns the value of this.change.get()
+     */
+    @Override
+    public boolean setChange(boolean change) {
+        return this.change = change;
     }
-
-    public void setChange(boolean change) {
-        this.change = change;
-    }
-
-
 }

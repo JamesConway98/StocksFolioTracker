@@ -32,7 +32,7 @@ public class Folio implements IFolio {
 
     public Stock getStock(String tickerSymbol) {
         for (Stock s : stocks) {
-            if (s.getSymbol().equals(tickerSymbol)) {
+            if (s.getTickerSymbol().equals(tickerSymbol)) {
                 return s;
             }
         }
@@ -60,8 +60,8 @@ public class Folio implements IFolio {
     private static List<String> getListTicker() {
         List<String> tickerSymbols = new ArrayList<String>();
         for (Stock s : stocks) {
-            tickerSymbols.add(s.getSymbol());
-            System.out.println("stock here: " + s.getSymbol());
+            tickerSymbols.add(s.getTickerSymbol());
+            System.out.println("stock here: " + s.getTickerSymbol());
         }
         return tickerSymbols;
     }
