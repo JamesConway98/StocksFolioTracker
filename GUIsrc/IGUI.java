@@ -38,32 +38,6 @@ public interface IGUI
      */
     public void showFileWindow(String path);
     
-    
-    //methods to close other windows
-    
-    public void closeCreateFolioWindow();
-
-    /**
-     * closes the buyStockWindow
-     */
-    public void closeBuyStockWindow();
-
-    /**
-     * closes the sellStockWindow 
-     */
-    public void closeSellStockWindow();
-
-    /**
-     * closes the editFolioWindow 
-     */
-    public void closeEditFolioWindow();
-    
-    /**
-     * closes the fileWindow 
-     */
-    public void closeFileWindow();
-    
-    
     // methods to modify/access data in main window
     
     /**
@@ -71,13 +45,7 @@ public interface IGUI
      * @param content list of stock contained in the respective folio
      * @param name name of tab (i.e. name of the folio)
      */
-    public void addTab(List<Stock> content, String name);
-    
-    /**
-     * lets gui know that something has changed
-     * 
-     */
-    public void update();
+    public void addTab(List<IStock> content, String name);
     
     /**
      * 
@@ -90,6 +58,19 @@ public interface IGUI
      * @return the index of the currently selected stock, -1 if no stock is selected
      */
     public int getStockIndex();
+    
+    /**
+     * update all folios with the specified name
+     * @param content new list of IStock
+     * @param name
+     */
+    public void updateFolio(List<IStock> content, String name);
+    
+    /**
+     * removes the tabs with the specified name
+     * @param name
+     */
+    public void deleteTab(String name);
     
     // methods to get data from fileWindow
     
@@ -161,16 +142,4 @@ public interface IGUI
      */
     public String getCreateName();
     
-    /**
-     * update all folios with the specified name
-     * @param content new list of IStock
-     * @param name
-     */
-    public void updateFolio(List<IStock> content, String name);
-    
-    /**
-     * removes the tabs with the specified name
-     * @param name
-     */
-    public void deleteTab(String name);
 }
