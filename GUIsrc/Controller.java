@@ -160,7 +160,7 @@ public class Controller implements IController
     	
     	if(folio != null) {
 	    	//turn set of Stock to List of Stock
-	    	stockList.addAll(folio.getStocks());	
+	    	stockList.addAll(folio.getStocks());
 	    	//create new tab in gui
 	    	gui.addTab(stockList, gui.getFilePath());
     	}
