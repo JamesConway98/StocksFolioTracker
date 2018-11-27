@@ -5,16 +5,16 @@ import javafx.beans.property.SimpleStringProperty;
 public class Stock implements IStock {
     private SimpleStringProperty tickerSymbol, name;
     private SimpleIntegerProperty numShares;
-    private SimpleDoubleProperty pps, holding;
+    private SimpleDoubleProperty pricePerShare, holding;
     private SimpleStringProperty changeSymbol;
     private boolean change;
 
     public Stock(String symbol, String name, double pricePerShare, int amount, boolean change) {
         this.tickerSymbol = new SimpleStringProperty(symbol);
         this.name = new SimpleStringProperty(name);
-        this.pps = new SimpleDoubleProperty(pricePerShare);
+        this.pricePerShare = new SimpleDoubleProperty(pricePerShare);
         this.numShares = new SimpleIntegerProperty(amount);
-        this.holding = new SimpleDoubleProperty(this.pps.get() * this.numShares.get());
+        this.holding = new SimpleDoubleProperty(this.pricePerShare.get() * this.numShares.get());
         this.change = change;
         
         if(change)
@@ -43,7 +43,7 @@ public class Stock implements IStock {
      */
     @Override
     public double getPricePerShare() {
-        return pps.get();
+        return pricePerShare.get();
     }
 
     /**
@@ -53,11 +53,11 @@ public class Stock implements IStock {
      */
     @Override
     public boolean setPricePerShare(double pps) {
-        if (pps < this.pps.get())
+        if (pps < this.pricePerShare.get())
             setChange(false);
         else
             setChange(true);
-        this.pps.set(pps);
+        this.pricePerShare.set(pps);
         return true;
     }
 
@@ -65,7 +65,7 @@ public class Stock implements IStock {
      * Effects: Returns this.numShares.get()
      */
     @Override
-    public int getNumOfShares() {
+    public int getNumShares() {
         return numShares.get();
     }
 
@@ -75,7 +75,7 @@ public class Stock implements IStock {
      * Effects: Sets this.numShares to num and returns true if this changed as a result
      */
     @Override
-    public boolean setNumOfShares(int num) {
+    public boolean setNumShares(int num) {
         this.numShares.set(num);
         return true;
     }
@@ -85,8 +85,8 @@ public class Stock implements IStock {
      * Effects: Sets this.holding to the product of this.pps.get() and this.numShares.get() and returns this.holding.get()
      */
     @Override
-    public double getValue() {
-        this.holding.set(this.pps.get() * this.numShares.get());
+    public double getHolding() {
+        this.holding.set(this.pricePerShare.get() * this.numShares.get());
         return holding.get();
     }
 
@@ -117,8 +117,8 @@ public class Stock implements IStock {
 
         return s.getTickerSymbol().equals(tickerSymbol.get())
                 && s.getName().equals(name.get())
-                && s.getNumOfShares() == numShares.get()
-                && s.getPricePerShare() == pps.get()
+                && s.getNumShares() == numShares.get()
+                && s.getPricePerShare() == pricePerShare.get()
                 && s.getChange() == change;
 
 

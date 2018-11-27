@@ -20,20 +20,20 @@ public interface IStock {
     /**
      * Effects: Returns the value of this.numShares
      */
-    public int getNumOfShares();
+    public int getNumShares();
 
     /**
      * Requires: num >= 0
      * Modifies: this
      * Effects: Sets this.numShares to num and returns true if this changed as a result
      */
-    public boolean setNumOfShares(int num);
+    public boolean setNumShares(int num);
 
     /**
      * Modifies: this
      * Effects: Sets this.holding to the product of this.pps and this.numShares and returns this.holding
      */
-    public double getValue();
+    public double getHolding();
 
     /**
      * Effects: Returns the value of this.change
