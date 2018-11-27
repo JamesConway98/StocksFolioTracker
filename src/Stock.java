@@ -3,14 +3,14 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Stock implements IStock {
-    private SimpleStringProperty symbol, name;
+    private SimpleStringProperty tickerSymbol, name;
     private SimpleIntegerProperty numShares;
     private SimpleDoubleProperty pps, holding;
     private SimpleStringProperty changeSymbol;
     private boolean change;
 
     public Stock(String symbol, String name, double pricePerShare, int amount, boolean change) {
-        this.symbol = new SimpleStringProperty(symbol);
+        this.tickerSymbol = new SimpleStringProperty(symbol);
         this.name = new SimpleStringProperty(name);
         this.pps = new SimpleDoubleProperty(pricePerShare);
         this.numShares = new SimpleIntegerProperty(amount);
@@ -35,7 +35,7 @@ public class Stock implements IStock {
      */
     @Override
     public String getTickerSymbol() {
-        return symbol.get();
+        return tickerSymbol.get();
     }
 
     /**
@@ -115,7 +115,7 @@ public class Stock implements IStock {
         }
         Stock s = (Stock) aStock;
 
-        return s.getTickerSymbol().equals(symbol.get())
+        return s.getTickerSymbol().equals(tickerSymbol.get())
                 && s.getName().equals(name.get())
                 && s.getNumOfShares() == numShares.get()
                 && s.getPricePerShare() == pps.get()
