@@ -160,4 +160,17 @@ public interface IGUI
      * @return the name of the folio to create
      */
     public String getCreateName();
+    
+    /**
+     * update all folios with the specified name
+     * @param content new list of IStock
+     * @param name
+     */
+    public void updateFolio(List<IStock> content, String name);
+    
+    /**
+     * removes the tabs with the specified name
+     * @param name
+     */
+    public void deleteTab(String name);
 }
