@@ -111,7 +111,7 @@ public class Controller implements IController
     public void buttonCreateFolioNowClick(MouseEvent e)
     {
     	
-    	List<Stock> stockList = new ArrayList<Stock>();
+    	List<IStock> stockList = new ArrayList<>();
     	
     	
     	folioTracker.createFolio(gui.getCreateName());
@@ -154,7 +154,7 @@ public class Controller implements IController
 	else // TODO do stuff for opening a folio
 	{
 		
-		List<Stock> stockList = new ArrayList<Stock>();
+		List<IStock> stockList = new ArrayList<>();
 		
 	    folioTracker.openFolio(gui.getFilePath());
     	gui.closeCreateFolioWindow();
