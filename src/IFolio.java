@@ -42,7 +42,7 @@ public interface IFolio {
      * Effects: Decreases numShares of Stock in this.stocks with the specified tickerSymbol by amount and returns true if this changed as a result, else returns false.
      * If a Stock does not exist in this with the specified tickerSymbol, returns false.
      */
-    boolean sellStock(String tickerSymbol, int amount) throws Folio.NotEnoughSharesException;
+    boolean sellStock(String tickerSymbol, int amount) throws NotEnoughSharesException;
 
     /**
      * Effects: Returns this.name

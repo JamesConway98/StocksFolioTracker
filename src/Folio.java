@@ -100,11 +100,4 @@ public class Folio implements IFolio {
     public void setFolioName(String name){
     	this.name = name;
     }
-
-    class NotEnoughSharesException extends Exception {
-
-        NotEnoughSharesException(String s) {
-            super(s);
-        }
-    }
 }
