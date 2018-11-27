@@ -6,6 +6,7 @@ public class Stock implements IStock {
     private SimpleStringProperty symbol, name;
     private SimpleIntegerProperty numShares;
     private SimpleDoubleProperty pps, holding;
+    private SimpleStringProperty changeSymbol;
     private boolean change;
 
     public Stock(String symbol, String name, double pricePerShare, int amount, boolean change) {
@@ -14,7 +15,16 @@ public class Stock implements IStock {
         this.pps = new SimpleDoubleProperty(pricePerShare);
         this.numShares = new SimpleIntegerProperty(amount);
         this.holding = new SimpleDoubleProperty(this.pps.get() * this.numShares.get());
-        this.change = change; 
+        this.change = change;
+        
+        if(change)
+        {
+            this.changeSymbol = new SimpleStringProperty(Character.toString((char)0x2191));
+        }
+        else
+        {
+            this.changeSymbol = new SimpleStringProperty(Character.toString((char)0x2193));
+        }
     }
 
     public String getName(){
@@ -112,5 +122,10 @@ public class Stock implements IStock {
                 && s.getChange() == change;
 
 
+    }
+    
+    public String getChangeSymbol()
+    {
+	return changeSymbol.get();
     }
 }
