@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Folio implements IFolio {
@@ -53,11 +50,23 @@ public class Folio implements IFolio {
     public boolean buyStock(String tickerSymbol, int amount) {
         Stock s;
         if ((s = getStock(tickerSymbol)) != null) {
-        	boolean result = s.setNumShares(s.getNumShares() + amount);
-        	assert s.getHolding() >= 0: "Value must be equivalent to 0 or greater.";
-        	return result;
+            int oldNumShares = getStock(tickerSymbol).getNumShares();
+            Thread updater = new Thread(){
+                @Override
+                public void run(){
+                    try {
+                        getTimer().join();
+                        s.setNumShares(s.getNumShares() + amount);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            updater.run();
+            assert s.getHolding() >= 0 : "Value must be equivalent to 0 or greater.";
+            return(getStock(tickerSymbol).getNumShares() - oldNumShares == amount);
         }
-        
+
         return false;
     }
 
@@ -70,19 +79,30 @@ public class Folio implements IFolio {
      */
     public boolean sellStock(String tickerSymbol, int amount) throws NotEnoughSharesException {
         Stock s;
-        boolean result = false;
         if ((s = getStock(tickerSymbol)) != null) {
-            if (s.getNumShares() < amount){
+            if (s.getNumShares() < amount) {
                 throw new NotEnoughSharesException(amount + " > " + s.getNumShares());
+            } else {
+                int oldNumShares = getStock(tickerSymbol).getNumShares();
+                Thread updater = new Thread(){
+                    @Override
+                    public void run(){
+                        try {
+                            getTimer().join();
+                            s.setNumShares(s.getNumShares() - amount);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                updater.run();
+                if (s.getNumShares() == 0) {
+                    stocks.getStocks().remove(s);
+                    assert !stocks.getStocks().contains(s) : "The stock should no longer be contained after selling stocks";
+                }
+                return(oldNumShares - getStock(tickerSymbol).getNumShares() == amount);
             }
-            else{
-                  result = s.setNumShares(s.getNumShares() - amount);
-            }
-        } if(s.getNumShares() == 0){
-        	stocks.getStocks().remove(s);
-        	assert !stocks.getStocks().contains(s): "The stock should no longer be contained after selling stocks";
-        }
-        return result;
+        } return false;
     }
 
     /**
@@ -91,29 +111,31 @@ public class Folio implements IFolio {
      * Effects: Creates a new instance of Stock, passing the parameters to the constructor of Stock and adding it to this.stocks, returns true if this changed as a result, else returns false.
      */
     public boolean addStock(String symbol, String name, double value, int amount, boolean change) {
-    	//value = -1.0;
+        //value = -1.0;
         Stock s = new Stock(symbol, name, value, amount, change);
         boolean result = stocks.getStocks().add(s);
-        assert checkStocks(stocks.getStocks()): "there should be only only one stock per Symbol";
+        assert checkStocks(stocks.getStocks()) : "there should be only only one stock per Symbol";
         return result;
     }
-    
+
     /*used for testing assertion in addStock()
-     * 
+     *
      * Requires: set of stocks
      * Effects: Returns true if the number of stocks per ticker symbol is <= 1
      */
-    public boolean checkStocks(Set<Stock> list){
-    	Set<Stock> currentStocks = list;
-    	int counter = 0;
-    	for(Stock s: currentStocks){
-    		for(Stock x: currentStocks){
-    			if(s.getTickerSymbol().equals(x.getTickerSymbol())){counter =+ 1;}
-    		}
-    	}
-    	return (counter <= 1);
+    public boolean checkStocks(Set<Stock> list) {
+        Set<Stock> currentStocks = list;
+        int counter = 0;
+        for (Stock s : currentStocks) {
+            for (Stock x : currentStocks) {
+                if (s.getTickerSymbol().equals(x.getTickerSymbol())) {
+                    counter = +1;
+                }
+            }
+        }
+        return (counter <= 1);
     }
-    
+
     /**
      * Effects: Returns this.name
      */
@@ -121,11 +143,11 @@ public class Folio implements IFolio {
         return name;
     }
 
-    public RefreshStocks getTimer(){
+    public RefreshStocks getTimer() {
         return stocks;
     }
-    
-    public void setFolioName(String name){
-    	this.name = name;
+
+    public void setFolioName(String name) {
+        this.name = name;
     }
 }

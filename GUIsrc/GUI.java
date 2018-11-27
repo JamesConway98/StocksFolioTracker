@@ -223,16 +223,16 @@ public class GUI extends Application implements IGUI
     
     public void updateFolio(List<IStock> content, String name)
     {
-	/*for(Tab t : tabs)
+	for(Tab t : tabs)
 	{
 	    if(t.getText().equals(name))
 	    {
 		((TableView<IStock>) t.getContent()).setItems(doObservableMagic(content));
 	    }
 	}
-	return;*/
-	deleteTab(name);
-	addTab(content, name);
+	return;
+	//deleteTab(name);
+	//addTab(content, name);
     }
     
     public void deleteTab(String name)
