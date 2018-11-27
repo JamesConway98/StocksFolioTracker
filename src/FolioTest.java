@@ -12,15 +12,14 @@ public class FolioTest {
     @BeforeEach
     void setUp(){
         folio = new Folio("Folio 1");
+        folio.addStock("AAA", "Stock1", 10.0, 1, true);
+        folio.addStock("BBB", "Stock2", 20.0, 1, true);
+        folio.addStock("CCC", "Stock3", 5.0, 1, true);
     }
 
     @Test
     void totalHoldingTest() {
         // 1st Test
-        folio.addStock("AAA", "Stock1", 10.0, 1, true);
-        folio.addStock("BBB", "Stock2", 20.0, 1, true);
-        folio.addStock("CCC", "Stock3", 5.0, 1, true);
-
         assertEquals(folio.totalHolding(), 35.0);
 
     }
@@ -37,8 +36,7 @@ public class FolioTest {
     @Test
     void getStockTest(){
         // 1st Test
-        Stock testStock = new Stock("BBB", "Stock2", 21.6, 12, true);
-        folio.addStock("BBB", "Stock2", 21.6, 12, true);
+        Stock testStock = new Stock("BBB", "Stock2", 20.0, 1, true);
         assertTrue(folio.getStock("BBB").equals(testStock));
 
 
@@ -47,10 +45,9 @@ public class FolioTest {
     @Test
     void buyStockTest(){
         // 1st Test
-        folio.addStock("AAA", "Stock1", 20.0, 10, true);
         assertTrue(folio.buyStock("AAA", 20));
         // 2nd Test
-        assertFalse(folio.buyStock("BBB", 20));
+        assertFalse(folio.buyStock("FFF", 20));
 
 
 
@@ -59,10 +56,9 @@ public class FolioTest {
     @Test
     void sellStockTest() throws NotEnoughSharesException {
         // 1st Test
-        folio.addStock("AAA", "Stock1", 20.0, 10, true);
         assertTrue(folio.sellStock("AAA", 5));
         // 2nd Test
-        assertFalse(folio.sellStock("BBB", 5));
+        assertFalse(folio.sellStock("FFF", 5));
         // 3rd Test
         assertThrows(NotEnoughSharesException.class, () -> {
             folio.sellStock("AAA", 100);
@@ -75,7 +71,7 @@ public class FolioTest {
     @Test
     void addStockTest(){
         // 1st Test
-        assertTrue(folio.addStock("AAA", "Stock1", 32.4, 5, true));
+        assertTrue(folio.addStock("EEE", "Stock4", 30.6, 5, true));
 
     }
 
