@@ -12,7 +12,7 @@ public class FolioTest {
     @BeforeEach
     void setUp(){
         folio = new Folio("Folio 1");
-        folio.addStock("AAA", "Stock1", 10.0, 1, true);
+        folio.addStock("AAA", "Stock1", 10.0, 10, true);
         folio.addStock("BBB", "Stock2", 20.0, 1, true);
         folio.addStock("CCC", "Stock3", 5.0, 1, true);
     }
@@ -20,7 +20,7 @@ public class FolioTest {
     @Test
     void totalHoldingTest() {
         // 1st Test
-        assertEquals(folio.totalHolding(), 35.0);
+        assertEquals(folio.totalHolding(), 125.0);
 
     }
 
@@ -58,8 +58,6 @@ public class FolioTest {
         // 1st Test
         assertTrue(folio.sellStock("AAA", 5));
         // 2nd Test
-        assertFalse(folio.sellStock("FFF", 5));
-        // 3rd Test
         assertThrows(NotEnoughSharesException.class, () -> {
             folio.sellStock("AAA", 100);
         });
