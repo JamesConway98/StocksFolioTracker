@@ -1,4 +1,6 @@
+import java.awt.List;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -54,8 +56,10 @@ public class FolioTracker implements IFolioTracker {
                 folio.addStock(stockTicker, stockName, stockPPS, stockNumShares, stockChange);
             }
             reader.close();
-            if (folios.add(folio))
-                return folio; // Returns the Folio
+            if (folios.add(folio)){
+            	assert !testFolios(): "Two folios are the same";
+                return folio;
+            }// Returns the Folio
             else
                 return null;
         } catch (IOException e) {
@@ -64,6 +68,49 @@ public class FolioTracker implements IFolioTracker {
             return null;
         }
     }
+    /*
+     * Requires: y != null && x != null
+     * effects: Checks if two folios are the same
+     */
+    private boolean testFolios(){
+    	boolean test; 
+    	for(Folio f: folios){
+    		for(Folio x: folios){
+    			if(!f.equals(x)){
+    				test = foliosEquals(f, x);
+    				if(test){return true;}
+    			}
+    		}
+    	} return false;
+    }
+    /**
+     * checks every
+     * @param y
+     * @param x
+     * @return
+     */
+    private boolean foliosEquals(Folio y, Folio x){
+    	Set<Stock> ySet = y.getStocks();
+    	ArrayList<Stock> yList = new ArrayList<Stock>();
+    	yList.addAll(ySet);
+    	Set<Stock> xSet = x.getStocks();
+    	ArrayList<Stock> xList = new ArrayList<Stock>();
+    	xList.addAll(xSet);
+    	int max = Integer.max(ySet.size(), xSet.size());    	
+    	for(int i = 0; i < max; i++){
+    		for(int z = 0; z < max; z++){
+    			if(ySet.size() != xSet.size()){ return false;}
+    			if(y.totalHolding() != x.totalHolding()){return false;}
+    			if(!y.getName().equals(x.getName())){return false;}
+    			if(yList.get(i).getTickerSymbol().equals(xList.get(z).getTickerSymbol())){
+    				if(yList.get(i).getValue() != xList.get(z).getValue()){return false;}
+    				if(yList.get(i).getPricePerShare() != xList.get(z).getPricePerShare()){return false;}
+    				if(yList.get(i).getNumOfShares() != xList.get(z).getNumOfShares()){return false;}
+    				if(!yList.get(i).getName().equals(xList.get(z).getName())){return false;}
+    			}
+    		}	
+    	}return true;
+    } 
 
     /**
      * Requires: name != null
@@ -132,10 +179,7 @@ public class FolioTracker implements IFolioTracker {
         // Return null no Folio exists in this with the specified name.
         return null;
     }
-
-    /**
-     * Effects: Returns this.folios
-     */
+    
     public Set<Folio> getFolios(){
     	return folios;
     }
