@@ -20,7 +20,7 @@ public class Folio implements IFolio {
     public double totalHolding() {
         double total = 0;
         for (Stock s : stocks.getStocks()) {
-            total += s.getValue();
+            total += s.getHolding();
         }
         return total;
     }
@@ -53,8 +53,8 @@ public class Folio implements IFolio {
     public boolean buyStock(String tickerSymbol, int amount) {
         Stock s;
         if ((s = getStock(tickerSymbol)) != null) {
-        	boolean result = s.setNumOfShares(s.getNumOfShares() + amount);
-        	assert s.getValue() >= 0: "Value must be equivalent to 0 or greater.";           
+        	boolean result = s.setNumShares(s.getNumShares() + amount);
+        	assert s.getHolding() >= 0: "Value must be equivalent to 0 or greater.";
         	return result;
         }
         
@@ -72,13 +72,13 @@ public class Folio implements IFolio {
         Stock s;
         boolean result = false;
         if ((s = getStock(tickerSymbol)) != null) {
-            if (s.getNumOfShares() < amount){
-                throw new NotEnoughSharesException(amount + " > " + s.getNumOfShares());           	 
+            if (s.getNumShares() < amount){
+                throw new NotEnoughSharesException(amount + " > " + s.getNumShares());
             }
             else{
-                  result = s.setNumOfShares(s.getNumOfShares() - amount);
+                  result = s.setNumShares(s.getNumShares() - amount);
             }
-        } if(s.getNumOfShares() == 0){
+        } if(s.getNumShares() == 0){
         	stocks.getStocks().remove(s);
         	assert !stocks.getStocks().contains(s): "The stock should no longer be contained after selling stocks";
         }
