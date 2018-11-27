@@ -123,7 +123,10 @@ public class Stock implements IStock {
 
 
     }
-    
+
+    /**
+     * Effects: Returns this.changeSymbol.get()
+     */
     public String getChangeSymbol()
     {
 	return changeSymbol.get();

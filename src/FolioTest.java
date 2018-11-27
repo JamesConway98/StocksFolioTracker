@@ -57,14 +57,14 @@ public class FolioTest {
     }
 
     @Test
-    void sellStockTest() throws Folio.NotEnoughSharesException {
+    void sellStockTest() throws NotEnoughSharesException {
         // 1st Test
         folio.addStock("AAA", "Stock1", 20.0, 10, true);
         assertTrue(folio.sellStock("AAA", 5));
         // 2nd Test
         assertFalse(folio.sellStock("BBB", 5));
         // 3rd Test
-        assertThrows(Folio.NotEnoughSharesException.class, () -> {
+        assertThrows(NotEnoughSharesException.class, () -> {
             folio.sellStock("AAA", 100);
         });
 
