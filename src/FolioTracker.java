@@ -28,6 +28,7 @@ public class FolioTracker implements IFolioTracker {
 
     /**
      * Requires: name != null
+     * Modifies: this
      * Effects: If a File with a name prefixed by the specified name does not exist in the filesystem, returns null, else it parses the File according to an expected format and creates a Folio from the read data, returns the Folio.
      */
     public Folio openFolio(String name) {

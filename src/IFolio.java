@@ -4,7 +4,7 @@ import java.util.Set;
 public interface IFolio {
 
     /**
-     * Effects: For all Stock in this.stocks, returns the sum of s.getValue() where s is a Stock in this.stocks
+     * Effects: Returns the sum of s.getValue() where s is a Stock in this.stocks, for all Stock in this.stocks
      */
     double totalHolding();
 
@@ -14,6 +14,7 @@ public interface IFolio {
     Set<Stock> getStocks();
 
     /**
+     * Requires: tickerSymbol != null
      * Effects: Returns a Stock with the specified tickerSymbol if one exists in this, else returns null
      */
     Stock getStock(String tickerSymbol);

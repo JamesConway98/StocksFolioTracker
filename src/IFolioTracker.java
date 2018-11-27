@@ -11,14 +11,15 @@ public interface IFolioTracker {
 
     /**
      * Requires: name != null
-     * Effects: A Folio with the specified name is returned if relevant saved data for it exists in the filesystem, else returns null.
+     * Modifies: this
+     * Effects: Creates a new Folio and constructs it with the data for Stocks detailed in a relevant test file, if one exists. Adds the Folio to this and returns the Folio, else returns null.
      */
     Folio openFolio(String name);
 
     /**
      * Requires: name != null
      * Modifies: this
-     * Effects: Saves a Folio's data to the filesystem and returns true if this changed as a result, else returns false.
+     * Effects: If a Folio with the specified name exists in this, returns true if a text file is created and the data from the Folio from the specified name is written to it, else returns false.
      */
     boolean saveFolio(String name);
 
