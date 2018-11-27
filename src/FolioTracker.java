@@ -124,6 +124,7 @@ public class FolioTracker implements IFolioTracker {
     public Folio getFolio(String name) {
         // Iterate through the Folios in this and return the Folio with the specified name
         for (Folio folio : folios) {
+        	System.out.println(folio.getName());
             if (folio.getName().equals(name))
                 return folio;
         }

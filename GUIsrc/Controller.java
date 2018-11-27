@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javafx.scene.input.MouseEvent;
 
@@ -95,8 +97,10 @@ public class Controller implements IController
     {
         Folio folio = folioTracker.getFolio(gui.getOpenFolioName());
 
+        System.out.println(folio);
+        
         if(folio != null)
-            folio.buyStock("Ticker Symbol", 0);
+            folio.buyStock(gui.getBuySymbol(), gui.getBuyAmount());
         
         gui.closeBuyStockWindow();
         gui.update();
@@ -108,17 +112,21 @@ public class Controller implements IController
      */
     public void buttonCreateFolioNowClick(MouseEvent e)
     {
+    	
+    	List<Stock> stockList = new ArrayList<Stock>();
+    	
+    	
     	folioTracker.createFolio(gui.getCreateName());
     	gui.closeCreateFolioWindow();
-    	gui.update();
+    	Folio folio = folioTracker.getFolio(gui.getCreateName());
+    	
+    	//turn set of Stock to List of Stock
+    	stockList.addAll(folio.getStocks());
+    	
+    	//create new tab in gui
+    	gui.addTab(stockList, gui.getCreateName());
     	
     	folioTracker.saveFolio(gui.getCreateName());
-    	
-    	System.out.println(Arrays.toString(folioTracker.getFolios().toArray()));
-    	
-    	if(folioTracker.getFolio(gui.getCreateName()) == null){
-    		System.out.println("BOOOKM");
-    	}
     		
     }
     
@@ -148,7 +156,18 @@ public class Controller implements IController
 	}
 	else // TODO do stuff for opening a folio
 	{
-	    folioTracker.openFolio("");
+		
+		List<Stock> stockList = new ArrayList<Stock>();
+		
+	    folioTracker.openFolio(gui.getFilePath());
+    	gui.closeCreateFolioWindow();
+    	Folio folio = folioTracker.getFolio(gui.getFilePath());
+    	
+    	//turn set of Stock to List of Stock
+    	stockList.addAll(folio.getStocks());
+    	
+    	//create new tab in gui
+    	gui.addTab(stockList, gui.getFilePath());
 	}
 	
 	gui.closeFileWindow();
