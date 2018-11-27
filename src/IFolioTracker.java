@@ -40,4 +40,11 @@ public interface IFolioTracker {
      * Effects: Returns a Set of the Folios that exist in this
      */
     Set<Folio> getFolios();
+
+    /**
+     * Requires: name != null
+     * Modifies: this
+     * Effects: Removes a Folio with the specified name from this if a Folio with the specified name exists in this, and returns true if this changed as result, else returns false.
+     */
+    boolean closeFolio(String name);
 }

@@ -71,8 +71,7 @@ public class Controller implements IController
      */
     public void buttonSaveFolioClick(MouseEvent e)
     {
-	gui.showFileWindow(""); // TODO set the file path to the currently open folio
-	saving  = true;
+	folioTracker.saveFolio(gui.getOpenFolioName());
     }
 
     /**
@@ -82,8 +81,13 @@ public class Controller implements IController
     {
         Folio folio = folioTracker.getFolio(gui.getOpenFolioName());
 
-      //if(folio != null)
-			//folio.sellStock(" ", 0);
+      if(folio != null)
+		try {
+			folio.sellStock(" ", 0);
+		} catch (NotEnoughSharesException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
         gui.closeSellStockWindow();
 
@@ -95,11 +99,21 @@ public class Controller implements IController
     public void buttonBuyNowClick(MouseEvent e)
     {
         Folio folio = folioTracker.getFolio(gui.getOpenFolioName());
-
-        System.out.println(folio);
         
-        if(folio != null)
-            folio.buyStock(gui.getBuySymbol(), gui.getBuyAmount());
+        if(folio != null) {
+            
+        	if(folio.getStock(gui.getBuySymbol()) == null) {
+            	folio.addStock(gui.getBuySymbol(), gui.getBuyName(), -1, gui.getBuyAmount(), true);
+            }
+        	else {
+        		folio.buyStock(gui.getBuySymbol(), gui.getBuyAmount());
+        	}
+        	
+        	List<IStock> stockList = new ArrayList<>();
+        	stockList.addAll(folio.getStocks());
+        	
+        	gui.updateFolio(stockList, gui.getBuyName());
+        }
         
         gui.closeBuyStockWindow();
 
