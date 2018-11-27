@@ -159,7 +159,7 @@ public class GUI extends Application implements IGUI
     private ObservableList<IStock> doObservableMagic(List<IStock> input)
     {
 	ObservableList<IStock> l = FXCollections.observableArrayList();
-	for(IStock s : l)
+	for(IStock s : input)
 	{
 	    l.add(s);
 	}
