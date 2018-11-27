@@ -227,12 +227,24 @@ public class GUI extends Application implements IGUI
 	{
 	    if(t.getText().equals(name))
 	    {
+		TableView table = ((TableView<IStock>) t.getContent());
 		((TableView<IStock>) t.getContent()).setItems(doObservableMagic(content));
+		TableColumn<IStock, String> symbolCol = new TableColumn<>("Ticker Symbol");
+		symbolCol.setCellValueFactory(new PropertyValueFactory<>("tickerSymbol"));
+		TableColumn<IStock, String> nameCol = new TableColumn<>("Stock Name");
+		nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+		TableColumn<IStock, Integer> amountCol = new TableColumn<>("Number of Shares");
+		amountCol.setCellValueFactory(new PropertyValueFactory<>("numShares"));
+		TableColumn<IStock, Double> valueCol = new TableColumn<>("Price per Share");
+		valueCol.setCellValueFactory(new PropertyValueFactory<>("pricePerShare"));
+		TableColumn<IStock, Double> totalCol = new TableColumn<>("Value of Holding");
+		totalCol.setCellValueFactory(new PropertyValueFactory<>("holding"));
+		TableColumn<IStock, String> changeCol = new TableColumn<>("Change");
+		changeCol.setCellValueFactory(new PropertyValueFactory<>("changeSymbol"));
+		table.getColumns().setAll(symbolCol, nameCol, amountCol, valueCol, totalCol, changeCol);
 	    }
 	}
 	return;
-	//deleteTab(name);
-	//addTab(content, name);
     }
     
     public void deleteTab(String name)
