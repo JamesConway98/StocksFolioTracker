@@ -86,7 +86,6 @@ public class Controller implements IController
 			//folio.sellStock(" ", 0);
 		
         gui.closeSellStockWindow();
-        gui.update();
 
     }
     
@@ -103,7 +102,6 @@ public class Controller implements IController
             folio.buyStock(gui.getBuySymbol(), gui.getBuyAmount());
         
         gui.closeBuyStockWindow();
-        gui.update();
 
     }
     
@@ -142,7 +140,6 @@ public class Controller implements IController
             folio.setFolioName(gui.getEditName());
         
         gui.closeEditFolioWindow();
-        gui.update();
     }
 
     /**
