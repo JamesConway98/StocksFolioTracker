@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javafx.application.*;
 import javafx.collections.ObservableList;
@@ -221,39 +223,52 @@ public class GUI extends Application implements IGUI
     
     public void updateFolio(List<IStock> content, String name)
     {
-	for(Tab t : tabs)
+	/*for(Tab t : tabs)
 	{
 	    if(t.getText().equals(name))
 	    {
 		((TableView<IStock>) t.getContent()).setItems(doObservableMagic(content));
 	    }
 	}
-	return;
+	return;*/
+	deleteTab(name);
+	addTab(content, name);
     }
     
     public void deleteTab(String name)
     {
-	for(Tab t : tabs)
+	/*for(Tab t : tabs)
 	{
 	    if(t.getText().equals(name))
 	    {
 		tabPane.getTabs().remove(t);
 		tabs.remove(t);
 	    }
-	}
+	}*/
+	for (Iterator<Tab> itr = tabs.iterator();itr.hasNext();){
+	    Tab t = itr.next();
+        if(t.getText().equals(name))
+        {
+            tabPane.getTabs().remove(t);
+            //tabs.remove(t);
+            itr.remove();
+        }
+    }
     }
     
     public String getOpenFolioName()
     {
 	int i = 0;
-	for(Tab tab : tabPane.getTabs())
-	{
-	    if(tabPane.getSelectionModel().isSelected(i))
-	    {
-		return tab.getText(); // return the folio name
-	    }
-	    i++;
-	}
+	if (tabPane != null){
+        for(Tab tab : tabPane.getTabs())
+        {
+            if(tabPane.getSelectionModel().isSelected(i))
+            {
+                return tab.getText(); // return the folio name
+            }
+            i++;
+        }
+    }
 	return null;
     }
     
