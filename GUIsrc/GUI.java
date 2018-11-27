@@ -243,8 +243,29 @@ public class GUI extends Application implements IGUI
 	tabPane.getTabs().add(tab);
     }
     
-    public void update() {
-    	//TODO
+    
+    public void updateFolio(List<IStock> content, String name)
+    {
+	for(Tab t : tabs)
+	{
+	    if(t.getText().equals(name))
+	    {
+		((TableView<IStock>) t.getContent()).setItems(doObservableMagic(content));
+	    }
+	}
+	return;
+    }
+    
+    public void deleteTab(String name)
+    {
+	for(Tab t : tabs)
+	{
+	    if(t.getText().equals(name))
+	    {
+		tabPane.getTabs().remove(t);
+		tabs.remove(t);
+	    }
+	}
     }
     
     public String getOpenFolioName()
