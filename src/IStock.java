@@ -46,5 +46,6 @@ public interface IStock {
      */
     public boolean setChange(boolean change);
 
+    public String getChangeSymbol();
 
 }
