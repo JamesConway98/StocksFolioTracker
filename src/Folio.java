@@ -53,8 +53,11 @@ public class Folio implements IFolio {
     public boolean buyStock(String tickerSymbol, int amount) {
         Stock s;
         if ((s = getStock(tickerSymbol)) != null) {
-            return s.setNumOfShares(s.getNumOfShares() + amount);
+        	boolean result = s.setNumOfShares(s.getNumOfShares() + amount);
+        	assert s.getValue() >= 0: "Value must be equivalent to 0 or greater.";           
+        	return result;
         }
+        
         return false;
     }
 
@@ -67,13 +70,19 @@ public class Folio implements IFolio {
      */
     public boolean sellStock(String tickerSymbol, int amount) throws NotEnoughSharesException {
         Stock s;
+        boolean result = false;
         if ((s = getStock(tickerSymbol)) != null) {
-            if (s.getNumOfShares() < amount)
-                throw new NotEnoughSharesException(amount + " > " + s.getNumOfShares());
-            else
-                return s.setNumOfShares(s.getNumOfShares() - amount);
+            if (s.getNumOfShares() < amount){
+                throw new NotEnoughSharesException(amount + " > " + s.getNumOfShares());           	 
+            }
+            else{
+                  result = s.setNumOfShares(s.getNumOfShares() - amount);
+            }
+        } if(s.getNumOfShares() == 0){
+        	stocks.getStocks().remove(s);
+        	assert !stocks.getStocks().contains(s): "The stock should no longer be contained after selling stocks";
         }
-        return false;
+        return result;
     }
 
     /**
@@ -82,10 +91,29 @@ public class Folio implements IFolio {
      * Effects: Creates a new instance of Stock, passing the parameters to the constructor of Stock and adding it to this.stocks, returns true if this changed as a result, else returns false.
      */
     public boolean addStock(String symbol, String name, double value, int amount, boolean change) {
+    	//value = -1.0;
         Stock s = new Stock(symbol, name, value, amount, change);
-        return stocks.getStocks().add(s);
+        boolean result = stocks.getStocks().add(s);
+        assert checkStocks(stocks.getStocks()): "there should be only only one stock per Symbol";
+        return result;
     }
-
+    
+    /*used for testing assertion in addStock()
+     * 
+     * Requires: set of stocks
+     * Effects: Returns true if the number of stocks per ticker symbol is <= 1
+     */
+    public boolean checkStocks(Set<Stock> list){
+    	Set<Stock> currentStocks = list;
+    	int counter = 0;
+    	for(Stock s: currentStocks){
+    		for(Stock x: currentStocks){
+    			if(s.getTickerSymbol().equals(x.getTickerSymbol())){counter =+ 1;}
+    		}
+    	}
+    	return (counter <= 1);
+    }
+    
     /**
      * Effects: Returns this.name
      */
