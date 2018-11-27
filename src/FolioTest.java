@@ -73,11 +73,7 @@ public class FolioTest {
 
     }
 
-    @Test
-    void updateStockTest(){
-        // 1st Test
-        //TODO
-    }
+   
 
     @Test
     void getNameTest(){
