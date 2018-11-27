@@ -132,7 +132,10 @@ public class FolioTracker implements IFolioTracker {
         // Return null no Folio exists in this with the specified name.
         return null;
     }
-    
+
+    /**
+     * Effects: Returns this.folios
+     */
     public Set<Folio> getFolios(){
     	return folios;
     }
