@@ -22,7 +22,13 @@ public class RefreshStocks extends Thread{
     private boolean refresh(){
         for (Stock s : stocks) {
             try {
+            	Double old_value = s.getPricePerShare();
                 s.setPricePerShare(Double.parseDouble(StrathQuoteServer.getLastValue(s.getTickerSymbol())));
+                if(hasIncreased(old_value,s.getPricePerShare())){
+                	s.setChange(true);
+                }else{
+                	s.setChange(false);
+                }
             } catch (WebsiteDataException e) {
                 System.out.println("Error connected to website.");
                 System.out.println(e.getMessage());
@@ -38,5 +44,9 @@ public class RefreshStocks extends Thread{
 
     public Set<Stock> getStocks(){
         return stocks;
+    }
+    
+    public boolean hasIncreased(Double old, Double new_stock){
+    	return(old < new_stock);
     }
 }
