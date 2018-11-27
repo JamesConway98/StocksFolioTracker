@@ -27,11 +27,11 @@ public class StockTest {
         // 4th Test
         assertEquals(stock.getPricePerShare(), 5);
         // 5th Test
-        assertEquals(stock.getNumOfShares(), 5); 
+        assertEquals(stock.getNumShares(), 5);
         // 6th Test
         assertEquals(stock.getChange(), true);
         // 7th Test
-        assertEquals(stock.getValue(), 25);
+        assertEquals(stock.getHolding(), 25);
     }
     
     @Test
@@ -40,17 +40,17 @@ public class StockTest {
     	// 1st test
     	stock.setPricePerShare(2);
         assertEquals(stock.getPricePerShare(), 2);
-        assertEquals(stock.getValue(), 10);
+        assertEquals(stock.getHolding(), 10);
         assertEquals(stock.getChange(), false);
     	// 2nd Test
     	stock.setPricePerShare(10);
         assertEquals(stock.getPricePerShare(), 10);
-        assertEquals(stock.getValue(), 50);
+        assertEquals(stock.getHolding(), 50);
         assertEquals(stock.getChange(), true);
         // 3rd Test
-        stock.setNumOfShares(10);
-        assertEquals(stock.getNumOfShares(), 10);
-        assertEquals(stock.getValue(), 100);
+        stock.setNumShares(10);
+        assertEquals(stock.getNumShares(), 10);
+        assertEquals(stock.getHolding(), 100);
         // 4th Test
         stock.setChange(false);
         assertEquals(stock.getChange(), false);

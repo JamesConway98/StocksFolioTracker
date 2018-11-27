@@ -209,7 +209,7 @@ public class GUI extends Application implements IGUI
 	TableColumn<IStock, Integer> amountCol = new TableColumn<>("Number of Shares");
 	amountCol.setCellValueFactory(new PropertyValueFactory<>("numShares"));
 	TableColumn<IStock, Double> valueCol = new TableColumn<>("Price per Share");
-	valueCol.setCellValueFactory(new PropertyValueFactory<>("pps"));
+	valueCol.setCellValueFactory(new PropertyValueFactory<>("pricePerShare"));
 	TableColumn<IStock, Double> totalCol = new TableColumn<>("Value of Holding");
 	totalCol.setCellValueFactory(new PropertyValueFactory<>("holding"));
 	TableColumn<IStock, String> changeCol = new TableColumn<>("Change");

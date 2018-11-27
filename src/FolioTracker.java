@@ -103,9 +103,9 @@ public class FolioTracker implements IFolioTracker {
     			if(y.totalHolding() != x.totalHolding()){return false;}
     			if(!y.getName().equals(x.getName())){return false;}
     			if(yList.get(i).getTickerSymbol().equals(xList.get(z).getTickerSymbol())){
-    				if(yList.get(i).getValue() != xList.get(z).getValue()){return false;}
+    				if(yList.get(i).getHolding() != xList.get(z).getHolding()){return false;}
     				if(yList.get(i).getPricePerShare() != xList.get(z).getPricePerShare()){return false;}
-    				if(yList.get(i).getNumOfShares() != xList.get(z).getNumOfShares()){return false;}
+    				if(yList.get(i).getNumShares() != xList.get(z).getNumShares()){return false;}
     				if(!yList.get(i).getName().equals(xList.get(z).getName())){return false;}
     			}
     		}	
@@ -129,7 +129,7 @@ public class FolioTracker implements IFolioTracker {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(folioFile));
                 writer.write(name + '\n');
                 for (Stock s : stocks) {
-                    writer.write(s.getName() + ";" + s.getTickerSymbol() + ";" + s.getPricePerShare() + ";" + s.getNumOfShares() + ";" + s.getChange() + ";\n");
+                    writer.write(s.getName() + ";" + s.getTickerSymbol() + ";" + s.getPricePerShare() + ";" + s.getNumShares() + ";" + s.getChange() + ";\n");
                 }
                 System.out.println("File saved for folio:\t" + name);
                 writer.close();

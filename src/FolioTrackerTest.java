@@ -53,11 +53,11 @@ class FolioTrackerTest {
                 assertNotNull(fOPEN);
                 System.out.println(fOPEN.getName());
                 for (Stock s : fOPEN.getStocks()) {
-                    System.out.println(s.getName() + "\t\t" + s.getTickerSymbol() + "\t\t" + s.getPricePerShare() + "\t\t" + s.getNumOfShares() + "\t\t" + s.getValue() + "\t\t" + s.getChange() + "\n");
+                    System.out.println(s.getName() + "\t\t" + s.getTickerSymbol() + "\t\t" + s.getPricePerShare() + "\t\t" + s.getNumShares() + "\t\t" + s.getHolding() + "\t\t" + s.getChange() + "\n");
                     assertEquals(s.getName(), "TestStock");
                     assertEquals(s.getTickerSymbol(), "test");
                     assertEquals(s.getPricePerShare(), 1.00);
-                    assertEquals(s.getNumOfShares(), 66);
+                    assertEquals(s.getNumShares(), 66);
                     assertTrue(s.getChange());
                 }
                 tracker.deleteFolio("TEST");

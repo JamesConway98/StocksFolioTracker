@@ -20,7 +20,7 @@ public class Main {
                             tracker.getFolio("TEST").buyStock("TSLA", 500);
                         System.out.println("STOCKS AT TIME: " + Calendar.getInstance().getTime());
                         for (Stock s : tracker.getFolio("TEST").getStocks()) {
-                            System.out.println(s.getName() + "\t\t" + s.getTickerSymbol() + "\t\t" + s.getPricePerShare() + "\t\t" + s.getNumOfShares() + "\t\t" + s.getValue() + "\t\t" + s.getChange() + "\n");
+                            System.out.println(s.getName() + "\t\t" + s.getTickerSymbol() + "\t\t" + s.getPricePerShare() + "\t\t" + s.getNumShares() + "\t\t" + s.getHolding() + "\t\t" + s.getChange() + "\n");
                         }
                         sleep(1000);
                         i++;
