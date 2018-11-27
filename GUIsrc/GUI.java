@@ -156,10 +156,10 @@ public class GUI extends Application implements IGUI
      * This magic method makes a normal list observable
      * "Alohomora!"
      */
-    private ObservableList<Stock> doObservableMagic(List<Stock> input)
+    private ObservableList<IStock> doObservableMagic(List<IStock> input)
     {
-	ObservableList<Stock> l = FXCollections.observableArrayList();
-	for(Stock s : l)
+	ObservableList<IStock> l = FXCollections.observableArrayList();
+	for(IStock s : l)
 	{
 	    l.add(s);
 	}
@@ -193,56 +193,29 @@ public class GUI extends Application implements IGUI
 	fileWindow.showWindow(path);
     }
     
-    
-// methods to close other windows
-    public void closeCreateFolioWindow()
-    {
-	createFolioWindow.close();
-    }
-
-    public void closeBuyStockWindow()
-    {
-	buyStockWindow.close();
-    }
-
-    public void closeSellStockWindow()
-    {
-	sellStockWindow.close();
-    }
-
-    public void closeEditFolioWindow()
-    {
-	editFolioWindow.close();
-    }
-    
-    public void closeFileWindow()
-    {
-	fileWindow.close();
-    }
-    
     // methods to modify/access data in main window
     
-    public void addTab(List<Stock> content, String name)
+    public void addTab(List<IStock> content, String name)
     {
 	Tab tab = new Tab(name);
+	tab.setClosable(false);
 	tabs.add(tab);
-	TableView<Stock> table = new TableView<>();
+	TableView<IStock> table = new TableView<>();
 	table.setItems(doObservableMagic(content));
-	TableColumn<Stock, String> symbolCol = new TableColumn<>("Ticker Symbol");
+	TableColumn<IStock, String> symbolCol = new TableColumn<>("Ticker Symbol");
 	symbolCol.setCellValueFactory(new PropertyValueFactory<>("symbol"));
-	TableColumn<Stock, String> nameCol = new TableColumn<>("Stock Name");
+	TableColumn<IStock, String> nameCol = new TableColumn<>("Stock Name");
 	nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-	TableColumn<Stock, Integer> amountCol = new TableColumn<>("Number of Shares");
+	TableColumn<IStock, Integer> amountCol = new TableColumn<>("Number of Shares");
 	amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
-	TableColumn<Stock, Double> valueCol = new TableColumn<>("Price per Share");
+	TableColumn<IStock, Double> valueCol = new TableColumn<>("Price per Share");
 	valueCol.setCellValueFactory(new PropertyValueFactory<>("value"));
-	TableColumn<Stock, Double> totalCol = new TableColumn<>("Value of Holding");
+	TableColumn<IStock, Double> totalCol = new TableColumn<>("Value of Holding");
 	totalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
 	table.getColumns().setAll(symbolCol, nameCol, amountCol, valueCol, totalCol);
 	tab.setContent(table);
 	tabPane.getTabs().add(tab);
     }
-    
     
     public void updateFolio(List<IStock> content, String name)
     {
@@ -290,9 +263,9 @@ public class GUI extends Application implements IGUI
 	    if(tabPane.getSelectionModel().isSelected(i))
 	    {
 		int j = 0;
-		for(Object o : ((TableView) tab.getContent()).getItems())
+		for(Object o : ((TableView<IStock>) tab.getContent()).getItems())
 		{
-		    if(((TableView) tab.getContent()).getSelectionModel().isSelected(j))
+		    if(((TableView<IStock>) tab.getContent()).getSelectionModel().isSelected(j))
 		    {
 			return j;
 		    }
@@ -364,3 +337,4 @@ public class GUI extends Application implements IGUI
 	return createFolioWindow.getNameText();
     }
 }
+
