@@ -212,7 +212,9 @@ public class GUI extends Application implements IGUI
 	valueCol.setCellValueFactory(new PropertyValueFactory<>("value"));
 	TableColumn<IStock, Double> totalCol = new TableColumn<>("Value of Holding");
 	totalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
-	table.getColumns().setAll(symbolCol, nameCol, amountCol, valueCol, totalCol);
+	TableColumn<IStock, String> changeCol = new TableColumn<>("Change");
+	changeCol.setCellValueFactory(new PropertyValueFactory<>("changeSymbol"));
+	table.getColumns().setAll(symbolCol, nameCol, amountCol, valueCol, totalCol, changeCol);
 	tab.setContent(table);
 	tabPane.getTabs().add(tab);
     }
