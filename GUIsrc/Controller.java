@@ -153,20 +153,19 @@ public class Controller implements IController
 	}
 	else // TODO do stuff for opening a folio
 	{
-		
 		List<IStock> stockList = new ArrayList<>();
 		
 	    folioTracker.openFolio(gui.getFilePath());
-    	gui.closeCreateFolioWindow();
     	Folio folio = folioTracker.getFolio(gui.getFilePath());
     	
-    	//turn set of Stock to List of Stock
-    	stockList.addAll(folio.getStocks());
-    	
-    	//create new tab in gui
-    	gui.addTab(stockList, gui.getFilePath());
+    	if(folio != null) {
+	    	//turn set of Stock to List of Stock
+	    	stockList.addAll(folio.getStocks());	
+	    	//create new tab in gui
+	    	gui.addTab(stockList, gui.getFilePath());
+    	}
 	}
-	
 	gui.closeFileWindow();
     }
+
 }
