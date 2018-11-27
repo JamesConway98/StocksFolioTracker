@@ -57,7 +57,6 @@ public class FolioTracker implements IFolioTracker {
             }
             reader.close();
             if (folios.add(folio)){
-            	assert !testFolios(): "Two folios are the same";
                 return folio;
             }// Returns the Folio
             else

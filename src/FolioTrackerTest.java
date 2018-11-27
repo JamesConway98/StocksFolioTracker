@@ -89,6 +89,7 @@ class FolioTrackerTest {
             assertFalse(tracker.saveFolio("FALSE_TEST"));
             // 3rd Test
             if (tracker.createFolio("SECURE_FILE"))
+                // IF THIS FAILS YOU NEED TO SET THE PERMISSIONS OF SECURE_FILE_DATA.txt TO NO READ/WRITE/EXEC FOR ANY USER
                 assertFalse(tracker.saveFolio("SECURE_FILE"));
         }
     }
