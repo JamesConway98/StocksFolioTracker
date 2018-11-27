@@ -100,10 +100,6 @@ public class Controller implements IController
     {
         Folio folio = folioTracker.getFolio(gui.getOpenFolioName());
         
-        int amount = gui.getBuyAmount();
-
-        System.out.println(folio);
-        
         if(folio != null) {
             
         	if(folio.getStock(gui.getBuySymbol()) == null) {
