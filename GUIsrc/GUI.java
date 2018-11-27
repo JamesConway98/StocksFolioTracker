@@ -338,5 +338,32 @@ public class GUI extends Application implements IGUI
     {
 	return createFolioWindow.getNameText();
     }
+    
+    // methods to close other windows
+    public void closeCreateFolioWindow()
+    {
+	createFolioWindow.close();
+    }
+
+    public void closeBuyStockWindow()
+    {
+	buyStockWindow.close();
+    }
+
+    public void closeSellStockWindow()
+    {
+	sellStockWindow.close();
+    }
+
+    public void closeEditFolioWindow()
+    {
+	editFolioWindow.close();
+    }
+    
+    public void closeFileWindow()
+    {
+	fileWindow.close();
+    }
+
 }
 
