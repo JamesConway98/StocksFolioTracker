@@ -142,4 +142,28 @@ public interface IGUI
      */
     public String getCreateName();
     
+    //methods to close other windows
+    
+    public void closeCreateFolioWindow();
+
+    /**
+     * closes the buyStockWindow
+     */
+    public void closeBuyStockWindow();
+
+    /**
+     * closes the sellStockWindow 
+     */
+    public void closeSellStockWindow();
+
+    /**
+     * closes the editFolioWindow 
+     */
+    public void closeEditFolioWindow();
+    
+    /**
+     * closes the fileWindow 
+     */
+    public void closeFileWindow();
+
 }
